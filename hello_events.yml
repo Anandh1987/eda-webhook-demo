@@ -1,0 +1,12 @@
+- name: Say Hello on Webhook
+  hosts: localhost
+  sources:
+    - ansible.eda.webhook:
+        port: 5001
+        token: demo
+  rules:
+    - name: Say Hello
+      condition: event.payload.message == "hello"
+      action:
+        run_job_template:
+          name: Hello Job Template
