@@ -1,0 +1,12 @@
+- name: Webhook Trigger Rule
+  hosts: localhost
+  sources:
+    - ansible.eda.webhook:
+        port: 5001
+        token: mysecret
+  rules:
+    - name: Trigger a job template
+      condition: event.payload.message == "trigger"
+      action:
+        run_job_template:
+          name: Print Hello from EDA
