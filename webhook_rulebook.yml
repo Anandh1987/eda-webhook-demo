@@ -1,12 +1,12 @@
-- name: Webhook Trigger Rule
+---
+- name: Webhook rulebook
   hosts: localhost
   sources:
     - ansible.eda.webhook:
-        port: 5001
-        token: mysecret
+        port: 5000
   rules:
-    - name: Trigger a job template
-      condition: event.payload.message == "trigger"
+    - name: Run playbook on message
+      condition: event.payload.message is defined
       action:
-        run_job_template:
-          name: Print Hello from EDA
+        run_playbook:
+          name: log-message.yml
