@@ -1,0 +1,8 @@
+---
+- name: Print message
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Show message from webhook
+      debug:
+        msg: "Received message: {{ event.payload.message }}"
